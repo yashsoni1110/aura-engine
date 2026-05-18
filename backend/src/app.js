@@ -13,6 +13,11 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust Render/Vercel/proxy X-Forwarded-For headers
+// Required for express-rate-limit to work behind a reverse proxy
+app.set('trust proxy', 1);
+
+
 // ─── Security & Performance Middleware ───────────────────────────────────────
 app.use(helmet());
 app.use(compression());
