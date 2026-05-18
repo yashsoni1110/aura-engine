@@ -1,0 +1,14 @@
+{
+  "name": "aura-engine-backend",
+  "version": "1.0.0",
+  "description": "Aura Enterprise Engine — Backend API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "seed": "node seed.js"
+  },
+  "keywords": [],
+  "author": "Prodesk IT",
+  "license": "ISC"
+}
