@@ -175,8 +175,39 @@ html, body {
   outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
 }
 .input:focus, .select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-.select { cursor: pointer; }
-.select option { background: var(--bg-card); }
+
+/* ── Custom Select Dropdown ── */
+.select {
+  cursor: pointer;
+  /* hide native arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* custom chevron arrow (indigo, matches accent) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  padding-right: 34px;
+  /* smooth all transitions */
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+.select:hover:not(:focus) {
+  border-color: rgba(99,102,241,0.35);
+  background-color: rgba(99,102,241,0.05);
+}
+/* dark dropdown panel — works in Chrome/Edge/Firefox */
+.select option {
+  background-color: #0d1120;
+  color: var(--text-primary);
+  padding: 8px 12px;
+  font-size: 13px;
+}
+.select option:checked,
+.select option:hover {
+  background-color: #1e2540;
+  color: #818cf8;
+}
 
 /* Search Bar */
 .search-wrap { position: relative; }

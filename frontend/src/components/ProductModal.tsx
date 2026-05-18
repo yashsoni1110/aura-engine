@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Product, CATEGORIES } from '@/lib/types';
 import { API_BASE } from '@/lib/types';
+import CustomSelect from '@/components/CustomSelect';
 
 interface ProductModalProps {
   product?: Product | null;   // null = create mode
@@ -149,9 +150,11 @@ export default function ProductModal({ product, onClose, onSaved }: ProductModal
 
               <div className="input-group">
                 <label className="input-label">Category</label>
-                <select className="select" value={form.category} onChange={e => handleChange('category', e.target.value)}>
-                  {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
+                <CustomSelect
+                  value={form.category}
+                  onChange={val => handleChange('category', val)}
+                  options={CATEGORIES.map(c => ({ value: c, label: c }))}
+                />
               </div>
 
               <div className="input-group">

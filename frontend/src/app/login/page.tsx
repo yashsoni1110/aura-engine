@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail, ArrowRight, Shield, Zap, BarChart3, Package, TrendingUp, Globe } from 'lucide-react';
+import { Lock, Mail, ArrowRight, Shield, Zap, BarChart3, Package, TrendingUp, Globe, Key } from 'lucide-react';
 import { setSession } from '@/hooks/useAuthGuard';
 
 export default function LoginPage() {
@@ -112,7 +112,35 @@ export default function LoginPage() {
         }
         .login-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
         .login-input::placeholder { color: #334155; }
-        .login-hint { font-size: 11px; color: #334155; margin-top: 6px; }
+        .login-hint {
+          margin-top: 16px;
+          background: rgba(99,102,241,0.06);
+          border: 1px dashed rgba(99,102,241,0.2);
+          border-radius: 10px;
+          padding: 12px 16px;
+          display: flex; flex-direction: column; gap: 7px;
+          cursor: pointer; transition: background 0.2s, border-color 0.2s;
+          width: 100%; text-align: left;
+        }
+        .login-hint:hover {
+          background: rgba(99,102,241,0.11);
+          border-color: rgba(99,102,241,0.4);
+        }
+        .login-hint-title {
+          font-size: 10px; font-weight: 700; color: #6366f1;
+          text-transform: uppercase; letter-spacing: 0.1em;
+          display: flex; align-items: center; gap: 5px;
+        }
+        .login-hint-row {
+          display: flex; align-items: center; justify-content: space-between;
+          font-size: 12px;
+        }
+        .login-hint-label { color: #475569; }
+        .login-hint-value {
+          font-family: 'Courier New', monospace; color: #94a3b8;
+          background: rgba(0,0,0,0.3); padding: 2px 8px;
+          border-radius: 4px; font-size: 11px; letter-spacing: 0.04em;
+        }
 
         .login-error {
           background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
@@ -228,12 +256,39 @@ export default function LoginPage() {
                   autoComplete="current-password"
                 />
               </div>
-
             </div>
 
-            <button type="submit" className="login-btn" disabled={loading}>
+            <button type="submit" className="login-btn" disabled={loading || envMissing}>
               {loading ? <><div className="spinner" /> Authenticating…</> : <>Sign In <ArrowRight size={16} /></>}
             </button>
+
+            {/* ── Credential hint — click to auto-fill ── */}
+            {!envMissing && (() => {
+              const isFilled = email === validEmail && password === validPassword;
+              return (
+                <button
+                  type="button"
+                  className="login-hint"
+                  onClick={() => { setEmail(validEmail); setPassword(validPassword); }}
+                  title="Click to auto-fill credentials"
+                >
+                  <div className="login-hint-title">
+                    <Key size={10} />
+                    {isFilled
+                      ? '✓ Credentials filled — click Sign In'
+                      : 'Demo Credentials  •  click to fill'}
+                  </div>
+                  <div className="login-hint-row">
+                    <span className="login-hint-label">Email</span>
+                    <span className="login-hint-value">{validEmail}</span>
+                  </div>
+                  <div className="login-hint-row">
+                    <span className="login-hint-label">Password</span>
+                    <span className="login-hint-value">{validPassword}</span>
+                  </div>
+                </button>
+              );
+            })()}
           </form>
 
           <div className="login-footer">

@@ -11,6 +11,7 @@ import { Product, SortField, SortDirection, PaginationMeta, CATEGORIES, API_BASE
 import { Plus, Download, RefreshCw, Search, SlidersHorizontal, X, PackageOpen, Edit3, Trash2 } from 'lucide-react';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
 import { useCompactMode } from '@/hooks/useCompactMode';
+import CustomSelect from '@/components/CustomSelect';
 
 export default function InventoryPage() {
   const ready        = useAuthGuard();
@@ -183,7 +184,7 @@ export default function InventoryPage() {
             <div className="filter-bar__top">
               <div className="filter-search input-group">
                 <label className="input-label" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <Search size={11} /> Omnisearch <span style={{ color: 'var(--accent-light)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(500ms debounce)</span>
+                  <Search size={11} /> Search
                 </label>
                 <div className="search-wrap">
                   <Search size={14} className="search-icon" />
@@ -198,19 +199,26 @@ export default function InventoryPage() {
 
               <div className="filter-field input-group">
                 <label className="input-label">Category</label>
-                <select id="category-filter" className="select" value={category}
-                  onChange={e => { setCategory(e.target.value); setCurrentPage(1); }}>
-                  <option value="">All Categories</option>
-                  {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
+                <CustomSelect
+                  id="category-filter"
+                  value={category}
+                  onChange={val => { setCategory(val); setCurrentPage(1); }}
+                  placeholder="All Categories"
+                  options={[
+                    { value: '', label: 'All Categories' },
+                    ...CATEGORIES.map(c => ({ value: c, label: c })),
+                  ]}
+                />
               </div>
 
               <div className="input-group" style={{ minWidth: 100 }}>
                 <label className="input-label">Per Page</label>
-                <select className="select" value={pageSize}
-                  onChange={e => { setPageSize(Number(e.target.value)); setCurrentPage(1); }}>
-                  {[25, 50, 100, 200].map(n => <option key={n} value={n}>{n}</option>)}
-                </select>
+                <CustomSelect
+                  value={String(pageSize)}
+                  onChange={val => { setPageSize(Number(val)); setCurrentPage(1); }}
+                  minWidth={100}
+                  options={[25, 50, 100, 200].map(n => ({ value: String(n), label: String(n) }))}
+                />
               </div>
 
               <div style={{ display: 'flex', gap: 8, alignSelf: 'flex-end' }}>
