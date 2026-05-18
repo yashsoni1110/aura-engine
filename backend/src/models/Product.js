@@ -70,15 +70,12 @@ const productSchema = new mongoose.Schema(
 // Compound text index for omnisearch
 productSchema.index({ productName: 'text', sku: 'text' });
 
-// Pre-save validation: price must be >= cost
-productSchema.pre('save', function (next) {
+// Pre-save validation: price must be >= cost (Mongoose 9 async hook)
+productSchema.pre('save', async function () {
   if (this.price < this.cost) {
-    const err = new Error('Price cannot be lower than cost');
-    err.statusCode = 400;
-    return next(err);
+    throw new Error('Price cannot be lower than cost');
   }
   this.lastUpdated = new Date();
-  next();
 });
 
 const Product = mongoose.model('Product', productSchema);
