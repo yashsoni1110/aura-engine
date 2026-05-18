@@ -4,12 +4,15 @@
 
 ### Enterprise Inventory Management Platform
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org)
-[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://mongodb.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![Node.js](https://img.shields.io/badge/Node.js-24+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://mongodb.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=flat-square&logo=vercel)](https://aura-engine-khaki.vercel.app)
 
 A full-stack logistics dashboard for managing **50,000+ SKUs** with real-time analytics, filtering, and CRUD — all in a dark, enterprise-grade UI.
+
+🔗 **Live:** [aura-engine-khaki.vercel.app](https://aura-engine-khaki.vercel.app) &nbsp;|&nbsp; **API:** [aura-engine-2sso.onrender.com](https://aura-engine-2sso.onrender.com/health)
 
 </div>
 
@@ -70,13 +73,14 @@ aura-engine/
 └── frontend/
     └── src/
         ├── app/
-        │   ├── login/          # Login page
+        │   ├── login/          # Login page with auto-fill demo hint
         │   ├── analytics/      # Dashboard with charts & KPIs
         │   ├── inventory/      # Data grid with filters
         │   └── profile/        # User profile (5 tabs)
         ├── components/
         │   ├── Sidebar.tsx
         │   ├── ProductModal.tsx
+        │   ├── CustomSelect.tsx # Animated dropdown (replaces native select)
         │   └── Toast.tsx
         └── hooks/
             ├── useDebounce.ts
@@ -147,6 +151,8 @@ Open **[http://localhost:3000](http://localhost:3000)** — you'll be redirected
 | Variable | Description |
 |----------|-------------|
 | `MONGODB_URI` | MongoDB connection string |
+| `FRONTEND_URL` | Deployed frontend URL (for CORS) |
+| `PORT` | Server port (default: `5000`) |
 
 ### `frontend/.env.local`
 
@@ -164,7 +170,8 @@ Open **[http://localhost:3000](http://localhost:3000)** — you'll be redirected
 
 ## 📡 API Reference
 
-**Base URL:** `http://localhost:5000`
+**Base URL (local):** `http://localhost:5000`  
+**Base URL (production):** `https://aura-engine-2sso.onrender.com`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
