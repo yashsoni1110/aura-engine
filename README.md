@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ Aura Engine
+# Aura Engine
 
 ### Enterprise Inventory Management Platform
 
@@ -12,38 +12,38 @@
 
 A full-stack logistics dashboard for managing **50,000+ SKUs** with real-time analytics, filtering, and CRUD — all in a dark, enterprise-grade UI.
 
-🔗 **Live:** [aura-engine-khaki.vercel.app](https://aura-engine-khaki.vercel.app) &nbsp;|&nbsp; **API:** [aura-engine-2sso.onrender.com](https://aura-engine-2sso.onrender.com/health)
+**Live:** [aura-engine-khaki.vercel.app](https://aura-engine-khaki.vercel.app) &nbsp;|&nbsp; **API:** [aura-engine-2sso.onrender.com](https://aura-engine-2sso.onrender.com/health)
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Quick Start](#-quick-start)
-- [Environment Variables](#-environment-variables)
-- [API Reference](#-api-reference)
-- [Security](#-security)
-- [Performance](#-performance)
-
----
-
-## ✨ Features
-
-- 🔐 **Secure Login** — credentials from environment variables, session guard on all pages, back-button blocked after sign-out
-- 📦 **Inventory Grid** — 50k SKUs with pagination, full-text search, category/price/stock filters, sortable columns
-- 📊 **Analytics Dashboard** — KPI cards, restock-priority bar chart, category valuation pie chart
-- ✏️ **CRUD** — Add, Edit, Delete products via a validated modal
-- 👤 **User Profile** — 5-tab profile page (Overview, Activity, Permissions, Preferences, Security)
-- 🗜️ **Compact Table Mode** — shrinks inventory rows; preference saved in `localStorage`
-- 📤 **CSV Export** — export the current filtered view in one click
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Environment Variables](#environment-variables)
+- [API Reference](#api-reference)
+- [Security](#security)
+- [Performance](#performance)
 
 ---
 
-## 🛠 Tech Stack
+## Features
+
+- **Secure Login** — credentials from environment variables, session guard on all pages, back-button blocked after sign-out
+- **Inventory Grid** — 50k SKUs with pagination, full-text search, category/price/stock filters, sortable columns
+- **Analytics Dashboard** — KPI cards, restock-priority bar chart, category valuation pie chart
+- **CRUD** — Add, Edit, Delete products via a validated modal
+- **User Profile** — 5-tab profile page (Overview, Activity, Permissions, Preferences, Security)
+- **Compact Table Mode** — shrinks inventory rows; preference saved in `localStorage`
+- **CSV Export** — export the current filtered view in one click
+
+---
+
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -58,7 +58,7 @@ A full-stack logistics dashboard for managing **50,000+ SKUs** with real-time an
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 aura-engine/
@@ -90,7 +90,7 @@ aura-engine/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js **18+**
@@ -144,7 +144,7 @@ Open **[http://localhost:3000](http://localhost:3000)** — you'll be redirected
 
 ---
 
-## 🔑 Environment Variables
+## Environment Variables
 
 ### `backend/.env`
 
@@ -168,7 +168,7 @@ Open **[http://localhost:3000](http://localhost:3000)** — you'll be redirected
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 **Base URL (local):** `http://localhost:5000`  
 **Base URL (production):** `https://aura-engine-2sso.onrender.com`
@@ -199,20 +199,20 @@ Open **[http://localhost:3000](http://localhost:3000)** — you'll be redirected
 
 ---
 
-## 🔒 Security
+## Security
 
 | Control | Detail |
 |---------|--------|
 | HTTP Headers | `helmet` — removes fingerprinting, sets security headers |
 | Rate Limiting | 200 requests / 15 min per IP |
 | CORS | Configured origin whitelist |
-| Validation | Zod schema on all write endpoints (`price ≥ cost`, `stock ≥ 0`) |
+| Validation | Zod schema on all write endpoints (`price >= cost`, `stock >= 0`) |
 | Session | `sessionStorage` — clears on tab close |
 | Sign-out | `router.replace()` removes protected pages from browser history |
 
 ---
 
-## ⚡ Performance
+## Performance
 
 | Optimization | Detail |
 |-------------|--------|

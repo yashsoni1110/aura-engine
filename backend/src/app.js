@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 5000;
 app.set('trust proxy', 1);
 
 
-// ─── Security & Performance Middleware ───────────────────────────────────────
+// Security & Performance Middleware
 app.use(helmet());
 app.use(compression());
 app.use(
@@ -42,7 +42,7 @@ app.use('/api', limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
-// ─── Routes ──────────────────────────────────────────────────────────────────
+// Routes
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
@@ -61,19 +61,19 @@ app.use((err, req, res, _next) => {
   res.status(statusCode).json({ success: false, message: err.message || 'Internal Server Error' });
 });
 
-// ─── Database Connection ──────────────────────────────────────────────────────
+// Database Connection
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000,
       maxPoolSize: 10,
     });
-    console.log('✅ MongoDB connected');
+    console.log('[Ready] MongoDB connected');
     app.listen(PORT, () =>
-      console.log(`🚀 Aura Engine API running on http://localhost:${PORT}`)
+      console.log(`[Server] Aura Engine API running on http://localhost:${PORT}`)
     );
   } catch (error) {
-    console.error('❌ MongoDB connection failed:', error.message);
+    console.error('[Error] MongoDB connection failed:', error.message);
     process.exit(1);
   }
 };

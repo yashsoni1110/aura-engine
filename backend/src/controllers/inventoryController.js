@@ -2,14 +2,7 @@ const Product = require('../models/Product');
 
 /**
  * GET /api/inventory
- * Paginated, filtered, sorted inventory list — optimized for 50k+ records.
- *
- * Performance strategy:
- * - Search uses MongoDB $text index on (productName, sku) when a search term
- *   is present, falling back to regex only for very short terms (<2 chars)
- *   where text index tokenization is unreliable.
- * - All other filters leverage the individual field indexes (category, price).
- * - count and find run in Promise.all() to parallelise the two DB round-trips.
+ * Paginated, filtered, and sorted inventory list.
  */
 const getInventory = async (req, res) => {
   try {
@@ -25,21 +18,17 @@ const getInventory = async (req, res) => {
     } = req.query;
 
     const pageNum = Math.max(1, parseInt(page, 10));
-    // Hard cap at 200 rows per page to protect server memory
     const limitNum = Math.min(200, Math.max(1, parseInt(limit, 10)));
     const skip = (pageNum - 1) * limitNum;
 
-    // ── Build filter ────────────────────────────────────────────────────────
+    // Build query filter
     const filter = {};
     const trimmedSearch = search.trim();
 
     if (trimmedSearch) {
       if (trimmedSearch.length >= 2) {
-        // $text uses the compound index { productName: 'text', sku: 'text' }
-        // and is vastly faster than regex on 50k records (index scan vs full scan)
         filter.$text = { $search: trimmedSearch };
       } else {
-        // For single chars, fall back to anchored regex (prefix match uses index)
         filter.$or = [
           { productName: { $regex: `^${trimmedSearch}`, $options: 'i' } },
           { sku: { $regex: `^${trimmedSearch}`, $options: 'i' } },
@@ -59,10 +48,9 @@ const getInventory = async (req, res) => {
       filter.stockQuantity = { $lte: parseInt(maxStock, 10) };
     }
 
-    // ── Build sort ──────────────────────────────────────────────────────────
+    // Build sort conditions
     let sortObj = {};
     if (trimmedSearch && trimmedSearch.length >= 2 && !sort) {
-      // When using $text, sort by relevance score first for best UX
       sortObj = { score: { $meta: 'textScore' }, _id: 1 };
     } else {
       const sortFields = sort.split(',');
@@ -73,9 +61,9 @@ const getInventory = async (req, res) => {
       });
     }
 
-    // ── Execute find + count in parallel ────────────────────────────────────
+    // Execute database query
     const projection = trimmedSearch && trimmedSearch.length >= 2
-      ? { score: { $meta: 'textScore' } }   // include relevance score
+      ? { score: { $meta: 'textScore' } }
       : {};
 
     const [products, totalRecords] = await Promise.all([
@@ -140,7 +128,6 @@ const createProduct = async (req, res) => {
  */
 const updateProduct = async (req, res) => {
   try {
-    // Fetch existing to validate price >= cost with partial updates
     const existing = await Product.findById(req.params.id).lean();
     if (!existing) return res.status(404).json({ success: false, message: 'Product not found' });
 

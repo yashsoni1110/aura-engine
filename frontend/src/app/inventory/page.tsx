@@ -262,7 +262,7 @@ export default function InventoryPage() {
           {/* Error */}
           {error && (
             <div style={{ background: 'var(--red-glow)', border: '1px solid var(--red)', borderRadius: 'var(--radius)', padding: '14px 20px', marginBottom: 16, color: 'var(--red)', display: 'flex', alignItems: 'center', gap: 10 }}>
-              ⚠ {error}
+              {error}
               <button className="btn btn-ghost btn-sm" onClick={fetchData} style={{ marginLeft: 'auto' }}>Retry</button>
             </div>
           )}

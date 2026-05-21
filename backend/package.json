@@ -9,7 +9,7 @@
     "seed": "node seed.js"
   },
   "keywords": [],
-  "author": "Prodesk IT",
+  "author": "Aura Engine Developer",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.8.1",

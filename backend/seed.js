@@ -67,25 +67,25 @@ function generateProduct(index) {
 }
 
 async function seed() {
-  console.log('🌱 Aura Engine — Database Seeder');
-  console.log('=================================');
+  console.log('[Seed] Aura Engine - Database Seeder');
+  console.log('=====================================');
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 10000 });
-    console.log('✅ Connected to MongoDB');
+    console.log('[Ready] Connected to MongoDB');
 
     // Clear existing data
     const existingCount = await Product.countDocuments();
     if (existingCount > 0) {
-      console.log(`🗑️  Clearing ${existingCount.toLocaleString()} existing products...`);
+      console.log(`[Info] Clearing ${existingCount.toLocaleString()} existing products...`);
       await Product.deleteMany({});
     }
 
     // Ensure indexes are built before inserting
     await Product.createIndexes();
-    console.log('📑 Indexes ensured');
+    console.log('[Info] Indexes ensured');
 
-    console.log(`\n⏳ Generating ${TOTAL_PRODUCTS.toLocaleString()} products in batches of ${BATCH_SIZE}...`);
+    console.log(`\n[Info] Generating ${TOTAL_PRODUCTS.toLocaleString()} products in batches of ${BATCH_SIZE}...`);
 
     const startTime = Date.now();
     let totalInserted = 0;
@@ -107,7 +107,7 @@ async function seed() {
     }
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
-    console.log(`\n\n✅ Seeding complete!`);
+    console.log(`\n\n[Success] Seeding complete!`);
     console.log(`   Inserted: ${totalInserted.toLocaleString()} products`);
     console.log(`   Time:     ${elapsed}s`);
     console.log(`   Rate:     ${Math.round(totalInserted / elapsed).toLocaleString()} products/sec`);
@@ -117,11 +117,11 @@ async function seed() {
     console.log(`   Verified: ${finalCount.toLocaleString()} documents in DB`);
 
   } catch (error) {
-    console.error('\n❌ Seeding failed:', error.message);
+    console.error('\n[Error] Seeding failed:', error.message);
     process.exit(1);
   } finally {
     await mongoose.disconnect();
-    console.log('👋 Disconnected from MongoDB');
+    console.log('[Info] Disconnected from MongoDB');
     process.exit(0);
   }
 }

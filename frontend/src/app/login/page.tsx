@@ -39,7 +39,7 @@ export default function LoginPage() {
       <style>{`
         .login-page { display: flex; min-height: 100vh; font-family: 'Inter', system-ui, sans-serif; background: #060912; }
 
-        /* ── Left Showcase Panel ── */
+        /* Left Showcase Panel */
         .login-showcase {
           flex: 1; display: flex; flex-direction: column; justify-content: center;
           padding: 60px 64px; position: relative; overflow: hidden;
@@ -77,7 +77,7 @@ export default function LoginPage() {
         .trust-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #475569; font-weight: 500; }
         .trust-dot { width: 6px; height: 6px; border-radius: 50%; }
 
-        /* ── Right Login Panel ── */
+        /* Right Login Panel */
         .login-panel {
           width: 480px; display: flex; flex-direction: column; justify-content: center;
           padding: 60px 56px; background: #0a0e1a;
@@ -176,13 +176,13 @@ export default function LoginPage() {
         <div className="login-showcase">
           <div className="showcase-content">
             <div className="showcase-badge">
-              <Zap size={12} /> Enterprise Inventory Intelligence
+              <Zap size={12} /> High-Performance Data Engineering
             </div>
             <h1 className="showcase-title">
               Manage <span>50,000+ SKUs</span> with real-time precision.
             </h1>
             <p className="showcase-desc">
-              Aura Engine delivers warehouse-grade inventory analytics, powered by MongoDB aggregation pipelines and built for logistics teams managing multi-location retail operations across the United States.
+              Aura Engine is a high-volume data grid dashboard designed to benchmark database aggregations. Powered by optimized MongoDB indexing and a stable React 19 UI state system.
             </p>
 
             <div className="showcase-stats">
@@ -197,22 +197,22 @@ export default function LoginPage() {
                 <div className="stat-icon" style={{ background: 'rgba(16,185,129,0.15)' }}>
                   <TrendingUp size={18} color="#10b981" />
                 </div>
-                <div className="stat-value">99.9%</div>
-                <div className="stat-label">Uptime SLA</div>
+                <div className="stat-value">&lt;100ms</div>
+                <div className="stat-label">Query Speed</div>
               </div>
               <div className="stat-card">
                 <div className="stat-icon" style={{ background: 'rgba(6,182,212,0.15)' }}>
                   <Globe size={18} color="#06b6d4" />
                 </div>
                 <div className="stat-value">40</div>
-                <div className="stat-label">Retail Chains</div>
+                <div className="stat-label">Locations</div>
               </div>
             </div>
 
             <div className="showcase-trust">
-              <div className="trust-item"><span className="trust-dot" style={{ background: '#10b981', boxShadow: '0 0 8px #10b981' }} /> SOC 2 Type II</div>
-              <div className="trust-item"><span className="trust-dot" style={{ background: '#6366f1', boxShadow: '0 0 8px #6366f1' }} /> AES-256 Encrypted</div>
-              <div className="trust-item"><span className="trust-dot" style={{ background: '#06b6d4', boxShadow: '0 0 8px #06b6d4' }} /> US-East Hosted</div>
+              <div className="trust-item"><span className="trust-dot" style={{ background: '#10b981', boxShadow: '0 0 8px #10b981' }} /> Optimized Indexes</div>
+              <div className="trust-item"><span className="trust-dot" style={{ background: '#6366f1', boxShadow: '0 0 8px #6366f1' }} /> Paginated Cursor</div>
+              <div className="trust-item"><span className="trust-dot" style={{ background: '#06b6d4', boxShadow: '0 0 8px #06b6d4' }} /> React 19 Hooks</div>
             </div>
           </div>
         </div>
@@ -262,7 +262,7 @@ export default function LoginPage() {
               {loading ? <><div className="spinner" /> Authenticating…</> : <>Sign In <ArrowRight size={16} /></>}
             </button>
 
-            {/* ── Credential hint — click to auto-fill ── */}
+            {/* Credential hint — click to auto-fill */}
             {!envMissing && (() => {
               const isFilled = email === validEmail && password === validPassword;
               return (
@@ -293,9 +293,9 @@ export default function LoginPage() {
 
           <div className="login-footer">
             <div className="login-footer-row">
-              <div className="login-footer-item"><Shield size={12} /> TLS 1.3</div>
-              <div className="login-footer-item"><Lock size={12} /> RBAC Enabled</div>
-              <div className="login-footer-item"><BarChart3 size={12} /> Real-time Analytics</div>
+              <div className="login-footer-item"><Shield size={12} /> Express REST API</div>
+              <div className="login-footer-item"><Lock size={12} /> Mongoose ODM</div>
+              <div className="login-footer-item"><BarChart3 size={12} /> Zod Validation</div>
             </div>
           </div>
         </div>

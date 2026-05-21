@@ -2,10 +2,7 @@ const Product = require('../models/Product');
 
 /**
  * GET /api/analytics
- * Heavy MongoDB aggregation pipeline — never fetches all 50k docs to JS.
- *
- * All four pipelines run in Promise.all() for parallel execution.
- * allowDiskUse: true prevents the 100MB RAM limit error on large datasets.
+ * Retrieve key metrics and breakdown stats for dashboard widgets.
  */
 const getAnalytics = async (req, res) => {
   try {
@@ -13,8 +10,7 @@ const getAnalytics = async (req, res) => {
 
     const [summaryResult, categoryValuation, restockPriority, outOfStock] = await Promise.all([
 
-      // ── Widget 3: KPI Summary ────────────────────────────────────────────
-      // $group over all docs in a single pass — no JS-side iteration needed
+      // KPI Summary aggregation
       Product.aggregate([
         {
           $group: {
@@ -36,8 +32,7 @@ const getAnalytics = async (req, res) => {
         },
       ], aggregateOpts),
 
-      // ── Widget 2: Portfolio Distribution (Pie Chart) ─────────────────────
-      // Groups by category, sums price * stockQuantity for total valuation
+      // Portfolio Distribution valuation
       Product.aggregate([
         {
           $group: {
@@ -57,9 +52,7 @@ const getAnalytics = async (req, res) => {
         { $sort: { totalValue: -1 } },
       ], aggregateOpts),
 
-      // ── Widget 1: Restock Priority (Bar Chart) ────────────────────────────
-      // Top 10 lowest non-zero stock — $match first to use the index,
-      // then $sort + $limit to avoid full-collection sort
+      // Restock Priority list
       Product.aggregate([
         { $match: { stockQuantity: { $gt: 0 } } },
         { $sort: { stockQuantity: 1 } },
@@ -76,8 +69,7 @@ const getAnalytics = async (req, res) => {
         },
       ], aggregateOpts),
 
-      // ── Out-of-Stock Alert Panel ──────────────────────────────────────────
-      // Returns up to 20 most recently-updated OOS items for the alert panel
+      // Out-of-Stock list
       Product.aggregate([
         { $match: { stockQuantity: 0 } },
         { $sort: { lastUpdated: -1 } },

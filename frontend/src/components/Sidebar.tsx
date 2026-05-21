@@ -37,7 +37,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* ── Hamburger button — mobile only ── */}
+      {/* Hamburger button — mobile only */}
       <button
         className="mobile-menu-btn"
         onClick={() => setMobileOpen(true)}
@@ -46,7 +46,7 @@ export default function Sidebar() {
         <Menu size={22} />
       </button>
 
-      {/* ── Overlay backdrop ── */}
+      {/* Overlay backdrop */}
       {mobileOpen && (
         <div
           className="sidebar-overlay"
@@ -56,7 +56,7 @@ export default function Sidebar() {
       )}
 
       <aside className={`sidebar${mobileOpen ? ' sidebar--open' : ''}`}>
-        {/* ── Close button (mobile) ── */}
+        {/* Close button (mobile) */}
         <button
           className="sidebar__close"
           onClick={() => setMobileOpen(false)}
@@ -65,23 +65,23 @@ export default function Sidebar() {
           <X size={18} />
         </button>
 
-        {/* ── Logo ── */}
+        {/* Logo */}
         <div className="sidebar__logo">
           <div className="sidebar__logo-icon"><Package size={18} color="#fff" /></div>
           <div>
             <div className="sidebar__logo-text">Aura Engine</div>
-            <div className="sidebar__logo-sub">Enterprise v2.0</div>
+            <div className="sidebar__logo-sub">v1.0.0 (Beta)</div>
           </div>
         </div>
 
-        {/* ── Workspace badge ── */}
+        {/* Workspace badge */}
         <div style={{ padding: '12px 16px 8px', borderBottom: '1px solid var(--border)' }}>
-          <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Workspace</div>
-          <div style={{ fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600 }}>Enterprise Client</div>
-          <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Midwest USA · Multi-location retail</div>
+          <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Environment</div>
+          <div style={{ fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600 }}>Development Mode</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Local Database · Test Client</div>
         </div>
 
-        {/* ── Nav ── */}
+        {/* Nav */}
         <nav className="sidebar__nav">
           <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '8px 4px 4px', fontWeight: 700 }}>Navigation</div>
           {navItems.map((item) => {
@@ -98,7 +98,7 @@ export default function Sidebar() {
           })}
         </nav>
 
-        {/* ── Footer ── */}
+        {/* Footer */}
         <div className="sidebar__footer">
           <div style={{ marginBottom: 8 }}>
             <div className="sidebar__status">

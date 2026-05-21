@@ -64,7 +64,7 @@ export default function CustomSelect({
         }
         .cselect-arrow.open { transform: rotate(180deg); }
 
-        /* ── Dropdown panel ── */
+        /* Dropdown panel */
         .cselect-panel {
           position: absolute; top: calc(100% + 6px); left: 0;
           min-width: 100%; z-index: 999;
@@ -82,7 +82,7 @@ export default function CustomSelect({
           to   { opacity: 1; transform: translateX(0)     scaleX(1)    scaleY(1);    }
         }
 
-        /* ── Option rows ── */
+        /* Option rows */
         .cselect-option {
           display: flex; align-items: center; padding: 11px 16px;
           font-size: 13px; color: var(--text-secondary);
